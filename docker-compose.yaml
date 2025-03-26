@@ -1,17 +1,18 @@
-services:
+# one service (container) for each of our api, app, and database
+services: 
   app:
-    build: ./app
-    container_name: web-app
-    hostname: web-app
-    volumes: ["./app/src:/appcode"]
+    build: ./app   #create a new image
+    container_name: web-app #name it
+    hostname: web-app # hostname
+    volumes: ["./app/src:/appcode"] #mount the app code to the container - container knows about the changes as they are happening so you dont have to rebuild the image each time there are changes 
     ports:
-      - 8501:8501
+      - 8501:8501 #mappings: host port (local machine):container port
 
   api:
     build: ./api
     container_name: web-api
     hostname: web-api
-    volumes: ["./api:/apicode"]
+    volumes: ["./api:/apicode"] # mount- format- local machine:container
     ports:
       - 4000:4000
 
@@ -22,6 +23,6 @@ services:
     container_name: mysql_db
     hostname: db
     volumes:
-      - ./database-files:/docker-entrypoint-initdb.d/:ro
+      - ./database-files:/docker-entrypoint-initdb.d/:ro #automatically load the sql files in the database into the container
     ports:
       - 3200:3306

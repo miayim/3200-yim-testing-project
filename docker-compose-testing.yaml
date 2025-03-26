@@ -1,12 +1,12 @@
-name: project-app-testing
+name: project-app-testing #name of the project- the one for you to play around with the code and everything 
 services:
   app-test:
     build: ./app
-    container_name: web-app-test
-    hostname: web-app
+    container_name: web-app-test #name of the container- different from the original file because you cannot have two of the same name running at the same time
+    hostname: web-app #hostname has to stay the same
     volumes: ["./app/src:/appcode"]
     ports:
-      - 8502:8501
+      - 8502:8501 #note that the ports are different from the original file because you cannot have two services running on the same port
 
   api-test:
     build: ./api
